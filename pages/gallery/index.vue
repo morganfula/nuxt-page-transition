@@ -4,6 +4,7 @@
 			name="custom"
 			title="Gallery"
 			:page-name="$route.name">
+
 			<div class="page-content">
 				<nuxt-link
 					v-for="(_, i) in 10"
@@ -15,18 +16,26 @@
 						alt="" />
 				</nuxt-link>
 			</div>
+
 		</NuxtLayout>
 	</div>
 </template>
 
 <script setup>
-	watch(
-		() => general.isPreloaderVisible,
-		() => {
-			contentAnimation({
+	definePageMeta(transition);
+
+  watch(
+		() => [general.isTransitionFinish, general.isPreloaderVisible],
+		([transitionFinish, preloaderVisible]) => {
+
+      if(transitionFinish && !preloaderVisible) {
+
+        contentAnimation({
 				type: 'image',
 				element: '.page-content__photo',
 			});
+        
+      }
 		}
 	);
 </script>
@@ -34,8 +43,8 @@
 <style lang="scss" scoped>
 	.page-content {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 10px;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 16px;
 		align-items: flex-start;
 	}
 </style>

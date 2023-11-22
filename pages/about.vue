@@ -27,13 +27,20 @@
 </template>
 
 <script setup>
-	watch(
-		() => general.isPreloaderVisible,
-		() => {
-			contentAnimation({
-				type: 'text',
-				element: '.page-content__block',
-			});
+	definePageMeta(transition);
+
+  watch(
+		() => [general.isTransitionFinish, general.isPreloaderVisible],
+		([transitionFinish, preloaderVisible]) => {
+
+      if(transitionFinish && !preloaderVisible) {
+
+        contentAnimation({
+          type: 'text',
+          element: '.page-content__block',
+			  });
+        
+      }
 		}
 	);
 </script>

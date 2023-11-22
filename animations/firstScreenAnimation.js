@@ -1,24 +1,24 @@
 export const firstScreenAnimation = ({ parent }) => {
-	const parentEl = document.querySelector(parent);
-	const header = parentEl.querySelector('.header');
-	const title = parentEl.querySelector('.default-title__wrap');
+	const parentEl = document.querySelector(parent)
+	const title = parentEl.querySelector('.title-default__wrap')
+	const header = parentEl.querySelector('.header')
+	const pageMask = parentEl.querySelector('.page-mask')
 
-	const tl = gsap.timeline();
+	const tl = gsap.timeline()
+
+	tl.to(pageMask, {
+		opacity: 0
+	});
 
 	tl.from(title, {
 		yPercent: 100,
-		delay: 0.8,
 		opacity: 0,
-		clearProps: 'all',
+		clearProps: 'all'
 	});
+  
+	tl.from(header, {
+		yPercent: -100,
+		clearProps: 'all'
+	}, '<');
 
-	tl.from(
-		header,
-		{
-			yPercent: -100,
-			clearProps: 'all',
-		},
-		'<'
-	);
-	console.log(parentEl, header);
 };

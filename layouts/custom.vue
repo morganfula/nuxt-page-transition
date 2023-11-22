@@ -1,7 +1,10 @@
 <template>
 	<div :class="`page ${props.pageName}`">
 		<TheHeader />
+
 		<div class="page-wrap _container">
+
+			<PageMask />
 			<TheTitle :text="props.title" />
 			<slot />
 		</div>
@@ -14,14 +17,14 @@
 		pageName: String,
 	});
 
-	watch(
-		() => general.isPreloaderVisible,
-		() => {
-			firstScreenAnimation({
-				parent: `.${props.pageName}`,
-			});
+	watch(() =>
+		[general.isTransitionStart, general.isPreloaderVisible],
+		([transitionStart, preloaderVisibility]) => {
+
+		if(transitionStart && !preloaderVisibility) {
+			firstScreenAnimation({parent: `.${props.pageName}`})
 		}
-	);
+	});
 </script>
 
 <style lang="scss"></style>

@@ -2,42 +2,49 @@
 	<div :class="general.pageBg">
 		<NuxtLayout
 			name="custom"
-			:title="`project-${$route.params.id}`"
-			:page-name="`project-${$route.params.id}`">
+			:page-name="`project-${$route.params.id}`"
+			:title="`project ${$route.params.id}`"
+		>
+
 			<div class="page-content">
 				<div
+					v-for="_, i in 2"
+          :key="i"
 					class="page-content__block"
-					v-for="(_, i) in 2"
-					:key="i">
+				>
 					<div class="page-content__block-photo">
-						<img
-							src="/1.jpg"
-							alt="" />
+						<img src="/1.jpg" alt="">
 					</div>
-
 					<div class="page-content__block-text p1">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro
-						rerum nostrum reiciendis architecto id sapiente, hic voluptatem
-						fugit minus suscipit commodi vel amet rem.
+						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo aspernatur, eos iste dolorum deserunt distinctio ad quam maxime fugiat consequuntur debitis temporibus veritatis. Laboriosam libero eveniet voluptates. Facilis, dolore natus.
 					</div>
 				</div>
+
 				<div class="page-next__project">
 					<nuxt-link
 						class="page-next__project-link hover-fadein h2"
-						:to="`/gallery/${+$route.params.id + 1}`">
-						Next Project
+						:to="`/gallery/${+$route.params.id+1}`"
+					>
+						next project
 					</nuxt-link>
 				</div>
+
 			</div>
+
 		</NuxtLayout>
 	</div>
 </template>
 
 <script setup>
-	watch(
-		() => general.isPreloaderVisible,
-		() => {
-			contentAnimation({
+  definePageMeta(transition)
+
+  watch(
+		() => [general.isTransitionFinish, general.isPreloaderVisible],
+		([transitionFinish, preloaderVisible]) => {
+
+      if(transitionFinish && !preloaderVisible) {
+
+        contentAnimation({
 				type: 'image',
 				element: '.page-content__block-photo',
 			});
@@ -51,6 +58,8 @@
 				type: 'text',
 				element: '.page-next__project',
 			});
+        
+      }
 		}
 	);
 </script>
