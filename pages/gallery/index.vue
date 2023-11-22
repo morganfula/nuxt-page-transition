@@ -19,7 +19,17 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+	watch(
+		() => general.isPreloaderVisible,
+		() => {
+			contentAnimation({
+				type: 'image',
+				element: '.page-content__photo',
+			});
+		}
+	);
+</script>
 
 <style lang="scss" scoped>
 	.page-content {

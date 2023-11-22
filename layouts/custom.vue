@@ -13,6 +13,15 @@
 		title: String,
 		pageName: String,
 	});
+
+	watch(
+		() => general.isPreloaderVisible,
+		() => {
+			firstScreenAnimation({
+				parent: `.${props.pageName}`,
+			});
+		}
+	);
 </script>
 
 <style lang="scss"></style>

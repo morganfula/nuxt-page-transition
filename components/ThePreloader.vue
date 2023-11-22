@@ -29,7 +29,7 @@
 			},
 			{
 				clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)',
-				duration: 1,
+				duration: 0.8,
 				ease: 'power4.inOut',
 			}
 		);

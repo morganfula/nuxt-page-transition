@@ -1,6 +1,9 @@
 <template>
 	<div :class="general.pageBg">
-		<NuxtLayout name="custom" title="About" :page-name="$route.name">
+		<NuxtLayout
+			name="custom"
+			title="About"
+			:page-name="$route.name">
 			<div class="page-content">
 				<div
 					v-for="(_, index) in 10"
@@ -23,7 +26,17 @@
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+	watch(
+		() => general.isPreloaderVisible,
+		() => {
+			contentAnimation({
+				type: 'text',
+				element: '.page-content__block',
+			});
+		}
+	);
+</script>
 
 <style lang="scss" scoped>
 	.page-content__block {

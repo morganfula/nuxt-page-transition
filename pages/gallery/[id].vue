@@ -6,9 +6,9 @@
 			:page-name="`project-${$route.params.id}`">
 			<div class="page-content">
 				<div
-					v-for="(_, i) in 3"
-					:key="i"
-					class="page-content__block">
+					class="page-content__block"
+					v-for="(_, i) in 2"
+					:key="i">
 					<div class="page-content__block-photo">
 						<img
 							src="/1.jpg"
@@ -20,21 +20,40 @@
 						rerum nostrum reiciendis architecto id sapiente, hic voluptatem
 						fugit minus suscipit commodi vel amet rem.
 					</div>
-
-					<div class="page-next__project">
-						<nuxt-link
-							class="page-next__project-link hover-fadein h2"
-							:to="`/gallery/${+$route.params.id + 1}`">
-							Next Project - {{ +$route.params.id + 1 }}
-						</nuxt-link>
-					</div>
+				</div>
+				<div class="page-next__project">
+					<nuxt-link
+						class="page-next__project-link hover-fadein h2"
+						:to="`/gallery/${+$route.params.id + 1}`">
+						Next Project
+					</nuxt-link>
 				</div>
 			</div>
 		</NuxtLayout>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+	watch(
+		() => general.isPreloaderVisible,
+		() => {
+			contentAnimation({
+				type: 'image',
+				element: '.page-content__block-photo',
+			});
+
+			contentAnimation({
+				type: 'text',
+				element: '.page-content__block-text',
+			});
+
+			contentAnimation({
+				type: 'text',
+				element: '.page-next__project',
+			});
+		}
+	);
+</script>
 
 <style lang="scss" scoped>
 	.page-content__block {
