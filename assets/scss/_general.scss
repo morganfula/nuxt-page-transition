@@ -4,10 +4,38 @@ body {
 	font-family: $font-medium;
 	width: 100%;
 	letter-spacing: -0.02em;
-	text-transform: uppercase;
+
+	background: $color-white;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	display: inline-flex;
+	cursor: pointer;
 }
 
 ._container {
-	padding-left: 16px;
-	padding-right: 16px;
+	padding-left: $default-gap;
+	padding-right: $default-gap;
+}
+
+.page_black {
+	background: $color-black;
+	color: $color-white;
+}
+
+.page_white {
+	background: $color-white;
+	color: $color-black;
+}
+
+a.router-link-active {
+	opacity: 0.3;
+	pointer-events: none;
+}
+
+.page-content {
+	max-width: 600px;
+	margin: 0 auto;
 }

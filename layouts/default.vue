@@ -1,13 +1,14 @@
 <template>
 	<div id="viewport">
+		<ThePreloader />
 		<slot />
-
-		<ClientOnly>
-			<TheExperience />
-		</ClientOnly>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+	onMounted(() => {
+		useSmoothScroll();
+	});
+</script>
 
 <style lang="scss"></style>

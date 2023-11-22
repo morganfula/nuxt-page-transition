@@ -1,1 +1,1 @@
-export { gsap } from 'gsap/all';
+export { gsap, ScrollTrigger } from 'gsap/all';
